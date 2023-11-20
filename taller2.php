@@ -140,6 +140,7 @@ function mostrarDiv() {
 }
 </script>
     <?php
+    /*
         // Declaramos las variables
         $articulo = $_POST("articulo");
         $valor = 0;
@@ -162,7 +163,103 @@ function mostrarDiv() {
         // Imprimimos los resultados
         echo "El artículo comprado es " . $articulo . " y el valor a pagar es $" . $totalPagar . ". <br>";
         echo "GRACIAS POR SU COMPRA";
-    ?>
+        */?>
+      <h1>Punto 6</h1>
+      <p> Diseñar un Algoritmo que lea las tres notas definitivas de un estudiante, las dos primeras
+      equivalen cada una al 35% de la nota final y la tercera nota equivale al 30%. En total un
+      estudiante necesita una nota superior o igual a 3.5/5.0 para aprobar la materia. Las notas
+      digitadas deben estar entre los valores de 0.0 y 5.0.
+      </p>
+
+      <form action="" method="get">
+    <label for="nota1">Nota 1</label>
+    <input type="text" class="form-control" name="nota1" placeholder="Nota 1" pattern="[0-5](\.\d{1,2})?" title="Ingrese un número decimal entre 0.0 y 5.0">
+
+    <label for="nota2">Nota 2</label>
+    <input type="text" class="form-control" name="nota2" placeholder="Nota 2" pattern="[0-5](\.\d{1,2})?" title="Ingrese un número decimal entre 0.0 y 5.0">
+
+    <label for="nota3">Nota 3</label>
+    <input type="text" class="form-control" name="nota3" placeholder="Nota 3" pattern="[0-5](\.\d{1,2})?" title="Ingrese un número decimal entre 0.0 y 5.0">
+
+    <button type="submit" class="btn btn-primary">Calcular</button>
+</form>
+
+      <?php
+// Verificamos si se enviaron datos mediante el método GET
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    // Obtenemos las notas del formulario
+    $nota1 = isset($_GET["nota1"]) ? floatval($_GET["nota1"]) : 0;
+    $nota2 = isset($_GET["nota2"]) ? floatval($_GET["nota2"]) : 0;
+    $nota3 = isset($_GET["nota3"]) ? floatval($_GET["nota3"]) : 0;
+
+    // Calculamos la nota final
+    $notaFinal = ($nota1 * 0.35) + ($nota2 * 0.35) + ($nota3 * 0.30);
+
+    // Comprobamos si el alumno aprueba
+    if ($notaFinal >= 3.5) {
+        echo "El alumno aprobó con una nota de $notaFinal";
+    } else {
+        echo "El alumno reprobó con una nota de $notaFinal";
+    }
+}
+?>
+<h1>Punto 7</h1>
+<p>Diseñe un Algoritmo que permita obtener el valor total de una compra, teniendo en cuenta
+que se hace un 20% de descuento a los clientes cuya compra supere los $1.000</p>
+
+<form action="">
+  <label for="totalCompra">Total de la compra</label>
+  <input type="number" class="form-control" id="totalCompra" name="totalCompra" placeholder="Total de la compra" min="0">
+
+  <button type="submit" class="btn btn-primary">Calcular</button>
+</form>
+
+<?php
+// Declaramos las variables
+$totalCompra = floatval($_GET["totalCompra"]);
+
+// Calculamos el descuento
+if ($totalCompra > 1000) {
+  $descuento = $totalCompra * 0.20;
+} else {
+  $descuento = 0;
+}
+
+// Calculamos el valor final
+$valorFinal = $totalCompra - $descuento;
+
+// Mostramos el resultado
+echo "El valor final de la compra es $valorFinal";
+?>
+<h1>Punto 8</h1>
+<p>Diseñar un Algoritmo que permita a un obrero calcular su salario semanal, el cual se obtiene
+de la siguiente manera:
+a) Si trabaja 40 horas o menos se le paga $16 por hora
+b) Si trabaja más de 40 horas se le paga $16 por cada una de las primeras 40 horas y $20 más
+por cada hora extra</p>
+
+<form action="">
+  <label for="horasTrabajadas">Horas trabajadas</label>
+  <input type="number" class="form-control" id="horasTrabajadas" name="horasTrabajadas" placeholder="Horas trabajadas" min="0">
+
+  <button type="submit" class="btn btn-primary">Calcular</button>
+</form>
+
+<?php
+// Declaramos las variables
+$horasTrabajadas = floatval($_GET["horasTrabajadas"]);
+
+// Calculamos el salario
+if ($horasTrabajadas <= 40) {
+  $salario = $horasTrabajadas * 16;
+} else {
+  $horasExtra = $horasTrabajadas - 40;
+  $salario = 40 * 16 + $horasExtra * (16 + 20);
+}
+
+// Mostramos el resultado
+echo "El salario semanal es $salario";
+?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
