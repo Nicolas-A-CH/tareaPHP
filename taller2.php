@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Taller2</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script>
+        function validarSeleccion() {
+            var peraCheckbox = document.getElementById("pera");
+            var manzanaCheckbox = document.getElementById("manzana");
+
+            if (peraCheckbox.checked && manzanaCheckbox.checked) {
+                alert("Seleccione solo una fruta a la vez.");
+                peraCheckbox.checked = false;
+                manzanaCheckbox.checked = false;
+            }
+        }
+    </script>
   </head>
 <body>
     <h1>Taller 2</h1>
@@ -91,79 +103,40 @@
     B. Valor a pagar
     C. Mensaje que diga “GRACIAS POR LA COMPRA”
     </p>
-    <label for="">Seleccione qué artículo desea comprar</label>
-<select name="articulo" id="articuloScrip" class="form-select" aria-label="Default select example" onchange="mostrarDiv()">
-  <option value="null">-- Seleccione una opción --</option>
-  <option value="Peras">Peras</option>
-  <option value="Manzanas">Manzanas</option>
-</select>
+    <form action="" method="get" onsubmit="return validarSeleccion()">
+    <label for="fruta">Seleccione una fruta:</label>
+    <input type="checkbox" id="pera" name="fruta" value="pera"> Pera
+    <input type="checkbox" id="manzana" name="fruta" value="manzana"> Manzana
 
-<div id="manzanas" class="d-none">
-  <label for="">¿Cuántas manzanas desea llevar? Recuerde que el kilo de manzana tiene un valor de $2.500</label>
-  <form action="">
-    <label for="manzanasInput" class="form-label">Ingrese el kilogramo de manzanas a llevar</label>
-    <input type="number" class="form-control" id="manzanasInput" name="Manzanas" placeholder="Número">
-    <div class="invalid-feedback">
-      Ingrese un valor válido.
-    </div>
-    <button type="submit" class="btn btn-primary mb-3">Confirmar</button>
-  </form>
-</div>
+    <br>
 
-<div id="peras" class="d-none">
-  <label for="">¿Cuántas peras desea llevar? Recuerde que el kilo de pera tiene un valor de $1.500</label>
-  <form action="">
-    <label for="perasInput" class="form-label">Ingrese el kilogramo de peras a llevar</label>
-    <input type="number" class="form-control" id="perasInput" name="Peras" placeholder="Número">
-    <div class="invalid-feedback">
-      Ingrese un valor válido.
-    </div>
-    <button type="submit" class="btn btn-primary mb-3">Confirmar</button>
-  </form>
-</div>
+    <label for="precio">Precio por kilo:</label>
+    <input type="number" id="precio" name="precio" step="0.01" min="0.01" required> USD por kilo
 
-<script>
-function mostrarDiv() {
-  var select = document.getElementById("articuloScrip");
-  var selectedOption = select.options[select.selectedIndex].value;
+    <br>
 
-  // Ocultar todos los divs
-  document.getElementById("manzanas").classList.add("d-none");
-  document.getElementById("peras").classList.add("d-none");
+    <label for="cantidad">Cantidad de kilos:</label>
+    <input type="number" id="cantidad" name="cantidad" step="0.01" min="0.01" required> kilos
 
-  // Mostrar el div correspondiente a la opción seleccionada
-  if (selectedOption === "Manzanas") {
-    document.getElementById("manzanas").classList.remove("d-none");
-  } else if (selectedOption === "Peras") {
-    document.getElementById("peras").classList.remove("d-none");
-  }
-}
-</script>
+    <br>
+
+    <button type="submit">Calcular Precio</button>
+
     <?php
-    /*
-        // Declaramos las variables
-        $articulo = $_POST("articulo");
-        $valor = 0;
-        $kilogramosPera = intval($_GET["Peras"]);
-        $kilogramosManzana = intval($_GET["Manzanas"]);
-        $totalPagar = 0;
+    // Obtener los valores del formulario
+    $fruta = $_GET["fruta"];
+    $precio = floatval($_GET["precio"]);
+    $cantidad = floatval($_GET["cantidad"]);
 
-        // Comprobamos el artículo comprado
-        if ($articulo == "Peras") {
-            $valor = 1500;
-            $totalPagar = $kilogramosPera * $valor;
-        } else if ($articulo == "Manzanas") {
-            $valor = 2500;
-            $totalPagar = $kilogramosManzana * $valor;
-        } else {
-        echo "El artículo ingresado no es válido.";
-        exit;
-        }
+    // Calcular el valor total de la venta
+    $total = $precio * $cantidad;
 
-        // Imprimimos los resultados
-        echo "El artículo comprado es " . $articulo . " y el valor a pagar es $" . $totalPagar . ". <br>";
-        echo "GRACIAS POR SU COMPRA";
-        */?>
+    // Mostrar los resultados
+    echo "<p>Cantidad de fruta comprada: $cantidad kilos de $fruta</p>";
+    echo "<p>Valor a pagar: Total de la venta $total USD</p>";
+    echo "<p>GRACIAS POR LA COMPRA</p>";
+    ?>
+</form>
       <h1>Punto 6</h1>
       <p> Diseñar un Algoritmo que lea las tres notas definitivas de un estudiante, las dos primeras
       equivalen cada una al 35% de la nota final y la tercera nota equivale al 30%. En total un

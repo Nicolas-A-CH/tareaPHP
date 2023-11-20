@@ -140,6 +140,114 @@ digitado por elusuario</p>
   // Mostramos el resultado
   echo "La sumatoria es $suma";
   ?>
-  
+  <h3>Punto 6</h3>
+  <?php
+
+$pesos = Array(
+
+    array('edad' => 10, 'Peso' => 56),
+    array('edad' => 7, 'Peso' => 79),
+    array('edad' => 14, 'Peso' => 50),
+    array('edad' => 28, 'Peso' => 35),
+    array('edad' => 10, 'Peso' => 56),
+    array('edad' => 45, 'Peso' => 67),
+    array('edad' => 55, 'Peso' => 80),
+    array('edad' => 85, 'Peso' => 47),
+    array('edad' => 76, 'Peso' => 40), 
+    array('edad' => 8, 'Peso' => 62),
+    array('edad' => 11, 'Peso' => 59),
+    array('edad' => 12, 'Peso' => 65),
+    array('edad' => 15, 'Peso' => 52),
+    array('edad' => 25, 'Peso' => 37),
+    array('edad' => 35, 'Peso' => 65),
+    array('edad' => 40, 'Peso' => 70),
+    array('edad' => 50, 'Peso' => 75),
+    array('edad' => 60, 'Peso' => 78),
+    array('edad' => 70, 'Peso' => 80),
+    array('edad' => 65, 'Peso' => 45),
+    array('edad' => 75, 'Peso' => 55),
+    array('edad' => 80, 'Peso' => 50),
+    array('edad' => 90, 'Peso' => 48),
+    array('edad' => 95, 'Peso' => 52),
+    array('edad' => 30, 'Peso' => 62),
+    array('edad' => 22, 'Peso' => 48),
+    array('edad' => 18, 'Peso' => 55),
+    array('edad' => 42, 'Peso' => 68),
+    array('edad' => 33, 'Peso' => 73),
+    array('edad' => 68, 'Peso' => 75),
+    array('edad' => 88, 'Peso' => 82),
+    array('edad' => 41, 'Peso' => 57),
+    array('edad' => 52, 'Peso' => 63),
+    array('edad' => 63, 'Peso' => 67),
+    array('edad' => 72, 'Peso' => 72),
+    array('edad' => 29, 'Peso' => 48),
+    array('edad' => 58, 'Peso' => 60),
+    array('edad' => 37, 'Peso' => 53),
+    array('edad' => 46, 'Peso' => 65),
+    array('edad' => 49, 'Peso' => 70),
+    array('edad' => 53, 'Peso' => 75),
+    array('edad' => 61, 'Peso' => 78),
+    array('edad' => 71, 'Peso' => 80),
+    array('edad' => 66, 'Peso' => 45),
+    array('edad' => 78, 'Peso' => 55),
+    array('edad' => 82, 'Peso' => 50),
+    array('edad' => 93, 'Peso' => 48),
+    array('edad' => 98, 'Peso' => 52),
+
+);
+
+$peso_nino = 0;
+$peso_joven = 0;
+$peso_adulto = 0;
+$peso_mayores = 0;
+
+$ContadorNino = 0;
+$ContadorJoven = 0;
+$ContadorAdulto = 0;
+$ContadorMayores = 0;
+
+    foreach ($pesos as $persona){
+
+        if($persona['edad'] >= 0 && $persona['edad'] <= 12){
+
+            $peso_nino += $persona['Peso'];
+            $ContadorNino++;
+
+        }
+
+        else if($persona['edad'] >= 13 && $persona['edad'] <= 29){
+
+            $peso_joven += $persona['Peso'];
+            $ContadorJoven++;
+
+        }
+
+        else if($persona['edad'] >= 30 && $persona['edad'] <= 59){
+
+            $peso_adulto += $persona['Peso'];
+            $ContadorAdulto++;
+
+        }
+
+        else if($persona['edad'] >= 60){
+
+            $peso_mayores += $persona['Peso'];
+            $ContadorMayores++;
+
+        }
+    
+    }
+
+        $PromedioNino = $peso_nino / $ContadorNino;
+        $PromedioJoven = $peso_joven / $ContadorJoven;
+        $PromedioAdulto = $peso_adulto / $ContadorAdulto;
+        $PromedioMayor = $peso_mayores / $ContadorMayores;
+
+    echo "El promedio de peso de la categoria de niños es de " . number_format ($PromedioNino, 2) . " kg <br>";
+    echo "El promedio de peso de la categoria de Jovenes es de " . number_format ($PromedioJoven, 2) . " kg <br>";
+    echo "El promedio de peso de la categoria de Adultos es de " . number_format ($PromedioAdulto, 2) . " kg <br>";
+    echo "El promedio de peso de la categoria de Adultos Mayores es de " . number_format ($PromedioMayor, 2) . " kg <br>";
+
+?>
 </body>
 </html>
